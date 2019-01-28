@@ -55,13 +55,13 @@ void ADS1x1x_write_register(uint8_t i2c_address, uint8_t reg, uint16_t value)
 /**************************************************************************/
 uint16_t ADS1x1x_read_register(uint8_t i2c_address, uint8_t reg)
 {
-    uint16_t result = 0;
+    uint8_t result[2];
     HAL_StatusTypeDef sta;
     HAL_I2C_Master_Transmit(&hi2c2, i2c_address<<1, &reg, 1, 100);
-    sta = HAL_I2C_Master_Receive(&hi2c2, ((i2c_address<<1)|0x01), (uint8_t *)&result, 2, 100);
+    sta = HAL_I2C_Master_Receive(&hi2c2, ((i2c_address<<1)|0x01), &result[0], 2, 100);
     if (sta != HAL_OK)
     {
-      return 0;
+           return 0;
     }
-    return result;     
+    return ((uint16_t)result[0]<<8)|result[1];     
 }
