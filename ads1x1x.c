@@ -23,7 +23,7 @@
     @brief  Writes 16 bits to the specified destination register.
 */
 /**************************************************************************/
-void ADS1x1x_write_register(uint8_t i2c_address, uint8_t reg, uint16_t value)
+__weak void ADS1x1x_write_register(uint8_t i2c_address, uint8_t reg, uint16_t value)
 {
   ADS1x1x_i2c_start_write(i2c_address);
   ADS1x1x_i2c_write(reg);
@@ -37,7 +37,7 @@ void ADS1x1x_write_register(uint8_t i2c_address, uint8_t reg, uint16_t value)
     @brief  Read 16 bits from the specified destination register.
 */
 /**************************************************************************/
-uint16_t ADS1x1x_read_register(uint8_t i2c_address, uint8_t reg)
+__weak uint16_t ADS1x1x_read_register(uint8_t i2c_address, uint8_t reg)
 {
   uint16_t result = 0;
   ADS1x1x_i2c_start_write(i2c_address);
